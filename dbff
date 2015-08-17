@@ -1,0 +1,46 @@
+#! /usr/bin/env python
+import argparse
+
+from comparer import *
+
+
+def main():
+    try:
+        parser = argparse.ArgumentParser(description='loris database comparer v' + Comparer.VERSION,
+                                         epilog='Report bugs to: hi@xiaee.com')
+        parser.add_argument("--source-host", metavar="HOST", default="127.0.0.1")
+        parser.add_argument("--source-port", metavar="PORT", default=3306)
+        parser.add_argument("--source-username", metavar="USERNAME", default="root")
+        parser.add_argument("--source-password", metavar="PASSWORD", default="")
+        parser.add_argument("--source-schema", metavar="SCHEMA")
+        parser.add_argument("--target-host", metavar="HOST", default="127.0.0.1")
+        parser.add_argument("--target-port", metavar="PORT", default=3306)
+        parser.add_argument("--target-username", metavar="USERNAME", default="root")
+        parser.add_argument("--target-password", metavar="PASSWORD", default="")
+        parser.add_argument("--target-schema", metavar="SCHEMA")
+        parser.add_argument("-d", "--no-data", action='store_true', help='do not write any table row information.')
+        parser.add_argument('--whitelist', metavar='TABLES', help='specify tables that will be included')
+        parser.add_argument('--blacklist', metavar='TABLES', help='specify tables that will be excluded')
+        parser.add_argument('--default-character-set', metavar='CHARSET_NAME', help='set the default character set')
+        parser.add_argument('--log-error', action='store', metavar='FILE',
+                            help='append warnings and errors to given file')
+        parser.add_argument('-O', '--output-document', metavar='FILE', help='output file name')
+        parser.add_argument('-v', '--verbose', action='store_true', help='print extra information')
+        parser.add_argument('--version', action='version', version='%(prog)s ' + Comparer.VERSION,
+                            help='output version information and exit')
+
+        opts = parser.parse_args(sys.argv[1:])
+        Comparer(source_host=opts.source_host, source_port=opts.source_port, source_schema=opts.source_schema,
+                 source_username=opts.source_username, source_password=opts.source_password,
+                 target_host=opts.target_host, target_port=opts.target_port, target_schema=opts.target_schema,
+                 target_username=opts.target_username, target_password=opts.target_password,
+                 no_data=opts.no_data, whitelist=opts.whitelist, blacklist=opts.blacklist,
+                 output_document=opts.output_document, verbose=opts.verbose).start()
+    except Exception, err:
+        sys.stderr.write(str(err) + "\n")
+        exit(1)
+
+
+if __name__ == '__main__':
+    main()
+
