@@ -7,7 +7,7 @@ from comparer import *
 def main():
     try:
         parser = argparse.ArgumentParser(description='loris database comparer v' + Comparer.VERSION,
-                                         epilog='Report bugs to: hi@xiaee.com')
+                                         epilog='Report bugs to: hi@xiayi.li')
         parser.add_argument("--source-host", metavar="HOST", default="127.0.0.1")
         parser.add_argument("--source-port", metavar="PORT", default=3306)
         parser.add_argument("--source-username", metavar="USERNAME", default="root")
