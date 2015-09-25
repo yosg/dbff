@@ -23,9 +23,12 @@ import time
 class Comparer():
     VERSION = '1.4.0'
 
-    def __init__(self, source_host, source_port, source_schema, source_username, source_password,
-                 target_host, target_port, target_schema, target_username, target_password,
-                 no_data, whitelist=None, blacklist=None, output_document=None, verbose=False):
+    def __init__(self, source_host, source_port, source_schema,
+                 source_username, source_password,
+                 target_host, target_port, target_schema,
+                 target_username, target_password,
+                 no_data, concurrency=8, whitelist=None, blacklist=None,
+                 output_document=None, verbose=False):
         self.source_host = source_host
         self.source_port = int(source_port)
         self.source_schema = source_schema
@@ -37,6 +40,7 @@ class Comparer():
         self.target_username = target_username
         self.target_password = target_password
         self.no_data = no_data
+        self.concurrency = concurrency
         if whitelist is not None and whitelist != "":
             self.whitelist = re.split('\s*,\s*', whitelist)
         else:
@@ -67,12 +71,6 @@ class Comparer():
 
         if self.output_document is not None:
             self.output_document.write(result)
-            #command = 'tar -cJf "%s" %s' % (self.output_document, ' '.join(self.manifest))
-            #process = subprocess.Popen(shlex.split(command), cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            #out, err = process.communicate()
-            #if process.returncode:
-            #    sys.stderr.write(err)
-            #    sys.exit(process.returncode)
         self.logger.info('')
         self.logger.info('All complete in %0.4f seconds.', time.time() - start_time)
 
@@ -117,7 +115,7 @@ class Comparer():
         workers = []
         buf = cStringIO.StringIO()
         l = threading.Lock()
-        for i in xrange(8):
+        for i in xrange(self.concurrency):
             dbffer = Dbffer(source.clone(), target.clone(),
                             queue, buf, l,
                             no_data=self.no_data,
