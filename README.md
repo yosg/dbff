@@ -1,6 +1,7 @@
 # dbff
 Compare MySQL tables and rows between database.
 
+```
 usage: dbff [-h] [--source-host HOST] [--source-port PORT]
             [--source-username USERNAME] [--source-password PASSWORD]
             [--source-schema SCHEMA] [--target-host HOST] [--target-port PORT]
@@ -35,4 +36,4 @@ optional arguments:
   --version             output version information and exit
 
 Report bugs to: hi@xiayi.li
-
+```
