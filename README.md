@@ -1,6 +1,8 @@
 # dbff
 Compare MySQL tables and rows between database.
 
+基于MySQL的数据库差异比对工具，支持表结构、数据行的差异比较，导出标准的SQL文件。
+
 ```
 usage: dbff [-h] [--source-host HOST] [--source-port PORT]
             [--source-username USERNAME] [--source-password PASSWORD]
