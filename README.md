@@ -1,5 +1,5 @@
 # dbff
-Compare MySQL tables and rows between database.
+Compare MySQL tables and rows between databases.
 
 基于MySQL的数据库差异比对工具，支持表结构、数据行的差异比较，导出标准的SQL文件。
 
@@ -38,4 +38,10 @@ optional arguments:
   --version             output version information and exit
 
 Report bugs to: hi@xiayi.li
+
+e.g.
+./dbff --source-host=192.168.1.6 --source-port=3306 --source-username=root --source-password=123456 --source-schema=mysql \
+       --target-host=192.168.1.8 --target-port=3306 --target-username=root --target-password=123456 --target-schema=mysql \
+       -O/tmp/mysql_6-8.sql -t16
+
 ```

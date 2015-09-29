@@ -22,6 +22,7 @@ def main():
         parser.add_argument('--whitelist', metavar='TABLES', help='specify tables that will be included')
         parser.add_argument('--blacklist', metavar='TABLES', help='specify tables that will be excluded')
         parser.add_argument('--default-character-set', metavar='CHARSET_NAME', help='set the default character set')
+        parser.add_argument('-t', '--concurrency', metavar='N', default=4, help="run multiple jobs in parallel")
         parser.add_argument('--log-error', action='store', metavar='FILE',
                             help='append warnings and errors to given file')
         parser.add_argument('-O', '--output-document', metavar='FILE', help='output file name')
@@ -34,8 +35,8 @@ def main():
                  source_username=opts.source_username, source_password=opts.source_password,
                  target_host=opts.target_host, target_port=opts.target_port, target_schema=opts.target_schema,
                  target_username=opts.target_username, target_password=opts.target_password,
-                 no_data=opts.no_data, whitelist=opts.whitelist, blacklist=opts.blacklist,
-                 output_document=opts.output_document, verbose=opts.verbose).start()
+                 no_data=opts.no_data, concurrency=opts.concurrency, whitelist=opts.whitelist,
+                 blacklist=opts.blacklist, output_document=opts.output_document, verbose=opts.verbose).start()
     except Exception, err:
         sys.stderr.write(str(err) + "\n")
         exit(1)

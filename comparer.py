@@ -27,7 +27,7 @@ class Comparer():
                  source_username, source_password,
                  target_host, target_port, target_schema,
                  target_username, target_password,
-                 no_data, concurrency=8, whitelist=None, blacklist=None,
+                 no_data, concurrency=4, whitelist=None, blacklist=None,
                  output_document=None, verbose=False):
         self.source_host = source_host
         self.source_port = int(source_port)
@@ -40,7 +40,7 @@ class Comparer():
         self.target_username = target_username
         self.target_password = target_password
         self.no_data = no_data
-        self.concurrency = concurrency
+        self.concurrency = int(concurrency)
         if whitelist is not None and whitelist != "":
             self.whitelist = re.split('\s*,\s*', whitelist)
         else:
