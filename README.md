@@ -40,8 +40,23 @@ optional arguments:
 Report bugs to: hi@xiayi.li
 
 e.g.
-./dbff --source-host=192.168.1.6 --source-port=3306 --source-username=root --source-password=123456 --source-schema=mysql \
+bin/dbff --source-host=192.168.1.6 --source-port=3306 --source-username=root --source-password=123456 --source-schema=mysql \
        --target-host=192.168.1.8 --target-port=3306 --target-username=root --target-password=123456 --target-schema=mysql \
        -O/tmp/mysql_6-8.sql -t16
 
 ```
+
+If you want to develop with dbff, just install from pypi: `sudo pip install dbff`
+
+and if you get the following error report related to the mysql_config command:
+```
+sh: mysql_config: command not found
+```
+install the mysql package first:
+```
+sudo apt-get install mysql
+or
+sudo brew install mysql
+```
+
+Good luck :)

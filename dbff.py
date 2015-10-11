@@ -1,7 +1,5 @@
 #! /usr/bin/python
 #-*- encoding=utf8 -*-
-import ConfigParser
-
 import MySQLdb
 from MySQLdb.cursors import DictCursor, SSCursor
 import Queue
@@ -19,9 +17,10 @@ import threading
 import sys
 import time
 
+__version__ = "1.4.4"
 
 class Comparer():
-    VERSION = '1.4.0'
+    VERSION = __version__
 
     def __init__(self, source_host, source_port, source_schema,
                  source_username, source_password,
