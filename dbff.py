@@ -98,14 +98,14 @@ class Comparer():
 
         blacklist = self.blacklist
         for name, table in source.tables.items():
-            if blacklist and re.match(blacklist, name):
+            if blacklist and name in blacklist:
                 continue
             if name in target.tables:
                 queue.put((table, target.tables[name]))
             else:
                 queue.put((table, None))
         for name, table in target.tables.items():
-            if blacklist and re.match(blacklist, name):
+            if blacklist and name in blacklist:
                 continue
             if name not in source.tables:
                 queue.put((None, table))
